@@ -2,54 +2,64 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { 
+  siSpotify, 
+  siApplepodcasts, 
+  siYoutube, 
+  siOvercast, 
+  siPocketcasts,
+  siAmazonmusic,
+  siStitcher,
+  siIheartradio
+} from 'simple-icons';
 
 const Subscribe = () => {
   const platforms = [
     {
       name: "Spotify",
-      icon: "https://via.placeholder.com/60",
+      icon: siSpotify.path,
       link: "https://spotify.com",
       color: "bg-[#1ED760]"
     },
     {
       name: "Apple Podcasts",
-      icon: "https://via.placeholder.com/60",
+      icon: siApplepodcasts.path,
       link: "https://podcasts.apple.com",
       color: "bg-[#872EC4]"
     },
     {
-      name: "Google Podcasts",
-      icon: "https://via.placeholder.com/60",
-      link: "https://podcasts.google.com",
-      color: "bg-[#0066D9]"
+      name: "YouTube",
+      icon: siYoutube.path,
+      link: "https://www.youtube.com",
+      color: "bg-[#FF0000]"
     },
     {
       name: "Amazon Music",
-      icon: "https://via.placeholder.com/60",
+      icon: siAmazonmusic.path,
       link: "https://music.amazon.com",
       color: "bg-[#00A8E1]"
     },
     {
       name: "Overcast",
-      icon: "https://via.placeholder.com/60",
+      icon: siOvercast.path,
       link: "https://overcast.fm",
       color: "bg-[#FC7E0F]"
     },
     {
       name: "Pocket Casts",
-      icon: "https://via.placeholder.com/60",
+      icon: siPocketcasts.path,
       link: "https://pocketcasts.com",
       color: "bg-[#F43E37]"
     },
     {
       name: "Stitcher",
-      icon: "https://via.placeholder.com/60",
+      icon: siStitcher.path,
       link: "https://stitcher.com",
       color: "bg-[#000000]"
     },
     {
       name: "iHeartRadio",
-      icon: "https://via.placeholder.com/60",
+      icon: siIheartradio.path,
       link: "https://iheart.com",
       color: "bg-[#C6002B]"
     }
@@ -77,7 +87,12 @@ const Subscribe = () => {
                 className="bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 rounded-xl p-6 border border-vivid-purple/30 flex flex-col items-center group"
               >
                 <div className={`w-16 h-16 rounded-full ${platform.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <img src={platform.icon} alt={platform.name} className="w-8 h-8" />
+                  <svg 
+                    role="img" 
+                    viewBox="0 0 24 24" 
+                    className="w-8 h-8 fill-white"
+                    dangerouslySetInnerHTML={{ __html: platform.icon }}
+                  />
                 </div>
                 <h3 className="text-xl font-bold text-white">{platform.name}</h3>
                 <p className="text-bright-orange mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

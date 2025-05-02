@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, ArrowRight, Youtube, Music, Rss } from 'lucide-react';
+import { Play, ArrowRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import EpisodeCard from '../components/EpisodeCard';
@@ -8,6 +9,15 @@ import { Button } from '@/components/ui/button';
 import { fetchEpisodes } from '../services/rssService';
 import { Episode } from '../components/EpisodeCard';
 import AudioPlayer from '../components/AudioPlayer';
+
+// Import Simple Icons
+import { 
+  siSpotify, 
+  siApplepodcasts, 
+  siYoutube, 
+  siOvercast, 
+  siPocketcasts 
+} from 'simple-icons';
 
 const Index = () => {
   const [latestEpisodes, setLatestEpisodes] = useState<Episode[]>([]);
@@ -180,7 +190,12 @@ const Index = () => {
                 rel="noopener noreferrer"
               >
                 <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
-                  <Music className="w-10 h-10" />
+                  <svg 
+                    role="img" 
+                    viewBox="0 0 24 24" 
+                    className="w-10 h-10 fill-current"
+                    dangerouslySetInnerHTML={{ __html: siSpotify.path }}
+                  />
                 </div>
                 <span className="text-white font-medium">Spotify</span>
               </a>
@@ -192,21 +207,31 @@ const Index = () => {
                 rel="noopener noreferrer"
               >
                 <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
-                  <Music className="w-10 h-10" />
+                  <svg 
+                    role="img" 
+                    viewBox="0 0 24 24" 
+                    className="w-10 h-10 fill-current"
+                    dangerouslySetInnerHTML={{ __html: siApplepodcasts.path }}
+                  />
                 </div>
                 <span className="text-white font-medium">Apple</span>
               </a>
               
               <a 
-                href="https://podcasts.google.com" 
+                href="https://www.youtube.com" 
                 className="bg-white/10 hover:bg-bright-orange transition-all duration-300 rounded-xl p-4 flex flex-col items-center w-32"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
-                  <Youtube className="w-10 h-10" />
+                  <svg 
+                    role="img" 
+                    viewBox="0 0 24 24" 
+                    className="w-10 h-10 fill-current"
+                    dangerouslySetInnerHTML={{ __html: siYoutube.path }}
+                  />
                 </div>
-                <span className="text-white font-medium">Google</span>
+                <span className="text-white font-medium">YouTube</span>
               </a>
               
               <a 
@@ -216,7 +241,12 @@ const Index = () => {
                 rel="noopener noreferrer"
               >
                 <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
-                  <Rss className="w-10 h-10" />
+                  <svg 
+                    role="img" 
+                    viewBox="0 0 24 24" 
+                    className="w-10 h-10 fill-current"
+                    dangerouslySetInnerHTML={{ __html: siOvercast.path }}
+                  />
                 </div>
                 <span className="text-white font-medium">Overcast</span>
               </a>
@@ -228,7 +258,12 @@ const Index = () => {
                 rel="noopener noreferrer"
               >
                 <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
-                  <Rss className="w-10 h-10" />
+                  <svg 
+                    role="img" 
+                    viewBox="0 0 24 24" 
+                    className="w-10 h-10 fill-current"
+                    dangerouslySetInnerHTML={{ __html: siPocketcasts.path }}
+                  />
                 </div>
                 <span className="text-white font-medium">Pocket</span>
               </a>
