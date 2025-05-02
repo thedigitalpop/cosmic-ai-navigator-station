@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -112,8 +111,10 @@ const Subscribe = () => {
                     role="img" 
                     viewBox="0 0 24 24" 
                     className="w-8 h-8 fill-white"
-                    dangerouslySetInnerHTML={{ __html: platform.icon }}
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={platform.icon} />
+                  </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white">{platform.name}</h3>
                 <p className="text-bright-orange mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

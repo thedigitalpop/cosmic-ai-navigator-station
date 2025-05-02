@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Play, ArrowRight } from 'lucide-react';
@@ -194,8 +193,10 @@ const Index = () => {
                     role="img" 
                     viewBox="0 0 24 24" 
                     className="w-10 h-10 fill-current"
-                    dangerouslySetInnerHTML={{ __html: siSpotify.path }}
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={siSpotify.path} />
+                  </svg>
                 </div>
                 <span className="text-white font-medium">Spotify</span>
               </a>
@@ -211,8 +212,10 @@ const Index = () => {
                     role="img" 
                     viewBox="0 0 24 24" 
                     className="w-10 h-10 fill-current"
-                    dangerouslySetInnerHTML={{ __html: siApplepodcasts.path }}
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={siApplepodcasts.path} />
+                  </svg>
                 </div>
                 <span className="text-white font-medium">Apple</span>
               </a>
@@ -228,8 +231,10 @@ const Index = () => {
                     role="img" 
                     viewBox="0 0 24 24" 
                     className="w-10 h-10 fill-current"
-                    dangerouslySetInnerHTML={{ __html: siYoutube.path }}
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={siYoutube.path} />
+                  </svg>
                 </div>
                 <span className="text-white font-medium">YouTube</span>
               </a>
@@ -245,8 +250,10 @@ const Index = () => {
                     role="img" 
                     viewBox="0 0 24 24" 
                     className="w-10 h-10 fill-current"
-                    dangerouslySetInnerHTML={{ __html: siOvercast.path }}
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={siOvercast.path} />
+                  </svg>
                 </div>
                 <span className="text-white font-medium">Overcast</span>
               </a>
@@ -262,8 +269,10 @@ const Index = () => {
                     role="img" 
                     viewBox="0 0 24 24" 
                     className="w-10 h-10 fill-current"
-                    dangerouslySetInnerHTML={{ __html: siPocketcasts.path }}
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={siPocketcasts.path} />
+                  </svg>
                 </div>
                 <span className="text-white font-medium">Pocket</span>
               </a>
