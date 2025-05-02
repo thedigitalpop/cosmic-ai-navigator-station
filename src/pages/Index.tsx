@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, ArrowRight } from 'lucide-react';
+import { Play, ArrowRight, Youtube, Music, Rss } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import EpisodeCard from '../components/EpisodeCard';
@@ -180,7 +179,9 @@ const Index = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src="https://via.placeholder.com/40" alt="Spotify" className="w-10 h-10 mb-2" />
+                <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
+                  <Music className="w-10 h-10" />
+                </div>
                 <span className="text-white font-medium">Spotify</span>
               </a>
               
@@ -190,7 +191,9 @@ const Index = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src="https://via.placeholder.com/40" alt="Apple Podcasts" className="w-10 h-10 mb-2" />
+                <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
+                  <Music className="w-10 h-10" />
+                </div>
                 <span className="text-white font-medium">Apple</span>
               </a>
               
@@ -200,7 +203,9 @@ const Index = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src="https://via.placeholder.com/40" alt="Google Podcasts" className="w-10 h-10 mb-2" />
+                <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
+                  <Youtube className="w-10 h-10" />
+                </div>
                 <span className="text-white font-medium">Google</span>
               </a>
               
@@ -210,7 +215,9 @@ const Index = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src="https://via.placeholder.com/40" alt="Overcast" className="w-10 h-10 mb-2" />
+                <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
+                  <Rss className="w-10 h-10" />
+                </div>
                 <span className="text-white font-medium">Overcast</span>
               </a>
               
@@ -220,7 +227,9 @@ const Index = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src="https://via.placeholder.com/40" alt="Pocket Casts" className="w-10 h-10 mb-2" />
+                <div className="w-10 h-10 flex items-center justify-center mb-2 text-white">
+                  <Rss className="w-10 h-10" />
+                </div>
                 <span className="text-white font-medium">Pocket</span>
               </a>
             </div>
@@ -234,4 +243,3 @@ const Index = () => {
 };
 
 export default Index;
-
