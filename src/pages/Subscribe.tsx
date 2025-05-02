@@ -9,7 +9,7 @@ import {
   siOvercast, 
   siPocketcasts,
   siAmazonmusic,
-  siGooglepodcasts,
+  siGoogle,
   siIheartradio
 } from 'simple-icons';
 import { toast } from '@/components/ui/use-toast';
@@ -56,7 +56,7 @@ const Subscribe = () => {
     },
     {
       name: "Google Podcasts",
-      icon: siGooglepodcasts.path,
+      icon: siGoogle.path,
       link: "https://podcasts.google.com",
       color: "bg-[#4285F4]"
     },
