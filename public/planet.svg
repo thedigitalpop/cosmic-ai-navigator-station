@@ -1,0 +1,13 @@
+
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Planet -->
+  <circle cx="100" cy="100" r="70" fill="#7E69AB"/>
+  
+  <!-- Ring -->
+  <ellipse cx="100" cy="100" rx="90" ry="20" fill="none" stroke="#F97316" stroke-width="3"/>
+  
+  <!-- Craters -->
+  <circle cx="70" cy="70" r="10" fill="#6A5A93"/>
+  <circle cx="120" cy="90" r="15" fill="#6A5A93"/>
+  <circle cx="85" cy="130" r="12" fill="#6A5A93"/>
+</svg>

@@ -1,0 +1,27 @@
+
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Helmet -->
+  <circle cx="150" cy="120" r="80" fill="#1f1346"/>
+  <ellipse cx="150" cy="120" rx="65" ry="70" fill="#9b87f5" opacity="0.9"/>
+  
+  <!-- Face -->
+  <circle cx="150" cy="120" r="50" fill="#FEC6A1"/>
+  
+  <!-- Eyes -->
+  <circle cx="130" cy="110" r="8" fill="#1f1346"/>
+  <circle cx="170" cy="110" r="8" fill="#1f1346"/>
+  
+  <!-- Smile -->
+  <path d="M130 135 Q150 155 170 135" stroke="#1f1346" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Helmet details -->
+  <circle cx="150" cy="70" r="5" fill="#F97316"/>
+  <rect x="145" y="40" width="10" height="20" rx="5" fill="#F97316"/>
+  
+  <!-- Suit -->
+  <rect x="120" y="180" width="60" height="80" rx="10" fill="#7E69AB"/>
+  
+  <!-- Badge -->
+  <circle cx="150" cy="200" r="10" fill="#8B5CF6"/>
+  <path d="M150 195 L153 205 L145 198 L155 198 L147 205 Z" fill="#F97316"/>
+</svg>

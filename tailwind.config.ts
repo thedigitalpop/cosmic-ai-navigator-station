@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom podcast theme colors
+				"primary-purple": "#9b87f5",
+				"secondary-purple": "#7E69AB",
+				"vivid-purple": "#8B5CF6",
+				"bright-orange": "#F97316",
+				"soft-orange": "#FEC6A1",
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -70,25 +77,34 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'shooting-star': {
+					'0%': { transform: 'translateX(0) translateY(0)', opacity: '0' },
+					'10%': { opacity: '1' },
+					'100%': { transform: 'translateX(200px) translateY(-100px)', opacity: '0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 5s ease-in-out infinite',
+				'float-slow': 'float 7s ease-in-out infinite',
+				'float-slower': 'float 9s ease-in-out infinite',
+				'shooting-star': 'shooting-star 3s ease-out forwards'
+			},
+			backgroundImage: {
+				'space-pattern': "url('/space-bg.svg')",
+				'space-gradient': 'linear-gradient(to bottom, #1f1346, #2d1b6b, #7E69AB)',
 			}
 		}
 	},
