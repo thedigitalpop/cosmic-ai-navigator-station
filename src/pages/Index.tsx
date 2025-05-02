@@ -76,7 +76,7 @@ const Index = () => {
                 <Button 
                   onClick={() => navigate('/episodes')} 
                   variant="outline" 
-                  className="border-white/40 text-white hover:bg-white/10 px-8 py-6 rounded-full"
+                  className="border-bright-orange text-bright-orange hover:bg-bright-orange hover:text-white transition-all duration-200 px-8 py-6 rounded-full"
                 >
                   Browse All Episodes
                 </Button>
@@ -234,3 +234,4 @@ const Index = () => {
 };
 
 export default Index;
+
