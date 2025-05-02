@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Play } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import AudioPlayer from './AudioPlayer';
 
 export interface Episode {
@@ -47,7 +48,11 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
       <div className="flex justify-between items-start mb-3">
         <div>
           <span className="text-bright-orange font-bold">Episode {episode.episodeNumber}</span>
-          <h3 className="text-xl font-bold text-white">{episode.title}</h3>
+          <h3 className="text-xl font-bold text-white">
+            <Link to={`/episodes/${episode.id}`} className="hover:text-bright-orange" onClick={(e) => e.stopPropagation()}>
+              {episode.title}
+            </Link>
+          </h3>
         </div>
         <button 
           onClick={togglePlay}

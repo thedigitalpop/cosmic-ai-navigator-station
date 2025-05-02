@@ -1,61 +1,56 @@
 
 import { Episode } from '../components/EpisodeCard';
 
-// A mock function to simulate fetching from an RSS feed
+// Function to fetch and parse the RSS feed
 export async function fetchEpisodes(): Promise<Episode[]> {
-  // In a real implementation, you would fetch the RSS feed and parse it
-  // For now, we'll return mock data
-  
-  // Simulate network request delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  
-  return [
-    {
-      id: '1',
-      title: 'AI Revolution in Content Marketing',
-      description: 'In this episode, we explore how AI is transforming content marketing strategies with advanced text generation and data analytics. Learn how companies are leveraging these tools to create more personalized and effective content campaigns.',
-      publishDate: '2023-04-15T09:00:00Z',
-      duration: '32:45',
-      audioUrl: 'https://example.com/podcast/ep1.mp3',
-      episodeNumber: 1
-    },
-    {
-      id: '2',
-      title: 'Navigating Social Media Algorithms with AI',
-      description: 'Discover how AI tools can help you understand and work with constantly changing social media algorithms. We discuss practical strategies for optimizing your content for maximum reach and engagement.',
-      publishDate: '2023-04-01T09:00:00Z',
-      duration: '28:15',
-      audioUrl: 'https://example.com/podcast/ep2.mp3',
-      episodeNumber: 2
-    },
-    {
-      id: '3',
-      title: 'Ethical Considerations in AI Marketing',
-      description: 'Join us as we delve into the important ethical questions surrounding AI in marketing. From data privacy to transparency, we cover the key issues marketers need to consider when implementing AI solutions.',
-      publishDate: '2023-03-15T09:00:00Z',
-      duration: '35:20',
-      audioUrl: 'https://example.com/podcast/ep3.mp3',
-      episodeNumber: 3
-    },
-    {
-      id: '4',
-      title: 'Predictive Analytics for Customer Journeys',
-      description: 'Learn how predictive analytics powered by AI can map and optimize customer journeys. We share real-world examples of companies using these technologies to improve conversion rates and customer satisfaction.',
-      publishDate: '2023-03-01T09:00:00Z',
-      duration: '30:10',
-      audioUrl: 'https://example.com/podcast/ep4.mp3',
-      episodeNumber: 4
-    },
-    {
-      id: '5',
-      title: 'Voice Search Optimization Strategies',
-      description: 'As voice search continues to grow, marketers need to adapt their SEO strategies. In this episode, we discuss how AI is changing voice search and provide actionable tips for optimizing your content.',
-      publishDate: '2023-02-15T09:00:00Z',
-      duration: '27:30',
-      audioUrl: 'https://example.com/podcast/ep5.mp3',
-      episodeNumber: 5
-    }
-  ];
+  try {
+    // Fetch the RSS feed
+    const response = await fetch('https://anchor.fm/s/f23f78f0/podcast/rss');
+    const data = await response.text();
+    
+    // Parse the XML data
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(data, 'application/xml');
+    
+    // Get all item elements (episodes)
+    const items = xml.querySelectorAll('item');
+    
+    // Convert NodeList to array and map to Episode objects
+    const episodes: Episode[] = Array.from(items).map((item, index) => {
+      // Extract necessary data
+      const title = item.querySelector('title')?.textContent || '';
+      const description = item.querySelector('description')?.textContent || '';
+      const pubDate = item.querySelector('pubDate')?.textContent || '';
+      
+      // Extract enclosure (audio file)
+      const enclosure = item.querySelector('enclosure');
+      const audioUrl = enclosure?.getAttribute('url') || '';
+      
+      // Extract duration from itunes:duration
+      const duration = item.querySelector('itunes\\:duration')?.textContent || '';
+      
+      // Generate a unique ID
+      const id = item.querySelector('guid')?.textContent || index.toString();
+      
+      // Clean up description (remove HTML tags)
+      const cleanDescription = description.replace(/<[^>]*>?/gm, '');
+      
+      return {
+        id: id,
+        title,
+        description: cleanDescription,
+        publishDate: pubDate,
+        duration,
+        audioUrl,
+        episodeNumber: items.length - index // Assuming newest episodes come first
+      };
+    });
+    
+    return episodes;
+  } catch (error) {
+    console.error('Failed to fetch RSS feed:', error);
+    return [];
+  }
 }
 
 // Function to fetch a specific episode by ID
@@ -68,5 +63,5 @@ export async function fetchEpisodeById(id: string): Promise<Episode | undefined>
 export async function connectToRssFeed(feedUrl: string): Promise<void> {
   console.log(`Connected to RSS feed: ${feedUrl}`);
   // In a real implementation, you would store the feedUrl in localStorage or context
-  // and use it to fetch the RSS feed data
+  localStorage.setItem('rssFeedUrl', feedUrl);
 }
