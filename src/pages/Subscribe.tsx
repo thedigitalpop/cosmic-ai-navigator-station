@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { 
@@ -9,11 +9,14 @@ import {
   siOvercast, 
   siPocketcasts,
   siAmazonmusic,
-  siStitcher,
+  siGooglepodcasts,
   siIheartradio
 } from 'simple-icons';
+import { toast } from '@/components/ui/use-toast';
 
 const Subscribe = () => {
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+
   const platforms = [
     {
       name: "Spotify",
@@ -52,10 +55,10 @@ const Subscribe = () => {
       color: "bg-[#F43E37]"
     },
     {
-      name: "Stitcher",
-      icon: siStitcher.path,
-      link: "https://stitcher.com",
-      color: "bg-[#000000]"
+      name: "Google Podcasts",
+      icon: siGooglepodcasts.path,
+      link: "https://podcasts.google.com",
+      color: "bg-[#4285F4]"
     },
     {
       name: "iHeartRadio",
@@ -64,6 +67,24 @@ const Subscribe = () => {
       color: "bg-[#C6002B]"
     }
   ];
+
+  const handleSubmitEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // In a real app, you would send this to your backend
+    toast({
+      title: "Subscribed!",
+      description: "You've successfully subscribed to our newsletter.",
+    });
+    setEmailSubmitted(true);
+  };
+  
+  const handleCopyRSS = () => {
+    navigator.clipboard.writeText('https://aimarketingnavigator.com/feed/podcast');
+    toast({
+      title: "RSS Feed Copied!",
+      description: "The RSS feed URL has been copied to your clipboard.",
+    });
+  };
   
   return (
     <div className="min-h-screen flex flex-col bg-space-gradient bg-fixed">
@@ -109,7 +130,7 @@ const Subscribe = () => {
               Subscribe to our newsletter and receive new episodes, exclusive content, and AI marketing tips directly to your email.
             </p>
             
-            <form className="max-w-md mx-auto">
+            <form className="max-w-md mx-auto" onSubmit={handleSubmitEmail}>
               <div className="flex flex-col sm:flex-row gap-4">
                 <input 
                   type="email" 
@@ -140,7 +161,7 @@ const Subscribe = () => {
               <code className="text-bright-orange">https://aimarketingnavigator.com/feed/podcast</code>
               <button 
                 className="bg-vivid-purple hover:bg-vivid-purple/90 text-white text-sm px-2 py-1 rounded"
-                onClick={() => navigator.clipboard.writeText('https://aimarketingnavigator.com/feed/podcast')}
+                onClick={handleCopyRSS}
               >
                 Copy
               </button>
