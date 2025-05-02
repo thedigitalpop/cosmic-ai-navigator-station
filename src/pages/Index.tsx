@@ -14,7 +14,7 @@ import {
   siSpotify, 
   siApplepodcasts, 
   siYoutube, 
-  siOvercast, 
+  siAmazonmusic, 
   siPocketcasts 
 } from 'simple-icons';
 
@@ -240,7 +240,7 @@ const Index = () => {
               </a>
               
               <a 
-                href="https://overcast.fm" 
+                href="https://music.amazon.com" 
                 className="bg-white/10 hover:bg-bright-orange transition-all duration-300 rounded-xl p-4 flex flex-col items-center w-32"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -252,10 +252,10 @@ const Index = () => {
                     className="w-10 h-10 fill-current"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path d={siOvercast.path} />
+                    <path d={siAmazonmusic.path} />
                   </svg>
                 </div>
-                <span className="text-white font-medium">Overcast</span>
+                <span className="text-white font-medium">Amazon</span>
               </a>
               
               <a 
