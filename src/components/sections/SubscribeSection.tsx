@@ -4,8 +4,7 @@ import {
   siSpotify, 
   siApplepodcasts, 
   siYoutube, 
-  siAmazonmusic, 
-  siPocketcasts 
+  siAmazonmusic
 } from 'simple-icons';
 import PodcastButton from '../PodcastButton';
 
@@ -30,11 +29,6 @@ const SubscribeSection: React.FC = () => {
       name: "Amazon",
       url: "https://music.amazon.com",
       iconPath: siAmazonmusic.path
-    },
-    {
-      name: "Pocket",
-      url: "https://pocketcasts.com",
-      iconPath: siPocketcasts.path
     }
   ];
   
