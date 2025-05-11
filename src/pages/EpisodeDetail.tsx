@@ -42,6 +42,48 @@ const EpisodeDetail = () => {
     }).format(date);
   };
   
+  // Function to convert URLs in text to actual clickable links
+  const formatDescription = (description: string): React.ReactNode => {
+    // This regex matches URLs in text
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    
+    if (!description) return "";
+    
+    // Split the description by paragraphs for better formatting
+    const paragraphs = description.split(/\n\n+/);
+    
+    return (
+      <>
+        {paragraphs.map((paragraph, i) => {
+          // Skip empty paragraphs
+          if (!paragraph.trim()) return null;
+          
+          // Create links for URLs inside paragraphs
+          const parts = paragraph.split(urlRegex);
+          const formatted = parts.map((part, j) => {
+            // If the part matches a URL pattern
+            if (part.match(urlRegex)) {
+              return (
+                <a 
+                  key={j}
+                  href={part}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-bright-orange hover:underline"
+                >
+                  {part}
+                </a>
+              );
+            }
+            return part;
+          });
+          
+          return <p key={i} className="mb-4">{formatted}</p>;
+        })}
+      </>
+    );
+  };
+  
   return (
     <div className="min-h-screen flex flex-col bg-space-gradient bg-fixed">
       <Header />
@@ -73,8 +115,8 @@ const EpisodeDetail = () => {
               
               <div className="prose prose-invert max-w-none">
                 <h2 className="text-2xl font-bold text-white mb-4">Episode Notes</h2>
-                <div className="text-white/80 whitespace-pre-line">
-                  {episode.description}
+                <div className="text-white/80 leading-relaxed">
+                  {formatDescription(episode.description)}
                 </div>
               </div>
               
