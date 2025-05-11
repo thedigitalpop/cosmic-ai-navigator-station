@@ -10,6 +10,7 @@ import EpisodeHeader from '../components/episode/EpisodeHeader';
 import EpisodeDescription from '../components/episode/EpisodeDescription';
 import EpisodeShare from '../components/episode/EpisodeShare';
 import EpisodeNotFound from '../components/episode/EpisodeNotFound';
+import YouTubeEmbed from '../components/episode/YouTubeEmbed';
 import { formatDate, formatDescription } from '../utils/formatters';
 
 const EpisodeDetail = () => {
@@ -51,6 +52,10 @@ const EpisodeDetail = () => {
               <div className="mb-8">
                 <AudioPlayer audioUrl={episode.audioUrl} title={episode.title} />
               </div>
+              
+              {episode.youtubeId && (
+                <YouTubeEmbed videoId={episode.youtubeId} />
+              )}
               
               <EpisodeDescription 
                 description={episode.description} 
