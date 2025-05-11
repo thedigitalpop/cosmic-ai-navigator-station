@@ -2,7 +2,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ExternalLink } from 'lucide-react';
 
 const AboutSection: React.FC = () => {
   const navigate = useNavigate();
@@ -25,9 +24,9 @@ const AboutSection: React.FC = () => {
                   href="https://thedigitalpop.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-bright-orange hover:underline inline-flex items-center"
+                  className="text-bright-orange hover:underline"
                 >
-                  Digital Pop <ExternalLink size={14} className="ml-1" />
+                  Digital Pop
                 </a>
               </p>
               <Button 

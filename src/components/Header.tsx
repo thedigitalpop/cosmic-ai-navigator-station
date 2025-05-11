@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, Headphones, Book, Podcast, Rocket, ExternalLink } from 'lucide-react';
+import { Home, Headphones, Book, Podcast, Rocket } from 'lucide-react';
 
 const Header = () => {
   return (
@@ -17,9 +17,9 @@ const Header = () => {
               href="https://thedigitalpop.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-bright-orange hover:underline inline-flex items-center"
+              className="text-bright-orange hover:underline"
             >
-              Digital Pop <ExternalLink size={14} className="ml-1" />
+              Digital Pop
             </a>
           </div>
         </div>

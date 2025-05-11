@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Twitter, Facebook, Instagram, Mail, ExternalLink } from 'lucide-react';
+import { Twitter, Facebook, Instagram, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -16,9 +16,9 @@ const Footer = () => {
               href="https://thedigitalpop.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-bright-orange hover:underline inline-flex items-center"
+              className="text-bright-orange hover:underline"
             >
-              Digital Pop <ExternalLink size={14} className="ml-1" />
+              Digital Pop
             </a>
           </p>
         </div>
@@ -66,9 +66,9 @@ const Footer = () => {
           href="https://thedigitalpop.com" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-bright-orange hover:underline inline-flex items-center"
+          className="text-bright-orange hover:underline"
         >
-          Digital Pop <ExternalLink size={14} className="ml-1" />
+          Digital Pop
         </a>. All rights reserved.</p>
       </div>
     </footer>

@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
 
 const DigitalPopCallout: React.FC = () => {
   return (
@@ -16,7 +15,7 @@ const DigitalPopCallout: React.FC = () => {
         rel="noopener noreferrer"
         className="inline-flex items-center text-bright-orange hover:underline"
       >
-        Visit Digital Pop <ExternalLink size={16} className="ml-1" />
+        Visit Digital Pop
       </a>
     </div>
   );
