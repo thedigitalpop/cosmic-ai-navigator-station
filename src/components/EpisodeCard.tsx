@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -12,6 +11,7 @@ export interface Episode {
   duration: string;
   audioUrl: string;
   episodeNumber: number;
+  imageUrl?: string; // Add optional imageUrl property
 }
 
 interface EpisodeCardProps {

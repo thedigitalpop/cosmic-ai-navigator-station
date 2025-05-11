@@ -32,6 +32,15 @@ export async function fetchEpisodes(): Promise<Episode[]> {
       // Generate a unique ID
       const id = item.querySelector('guid')?.textContent || index.toString();
       
+      // Extract image URL if available
+      // Try to get the episode-specific image from itunes:image
+      let imageUrl = item.querySelector('itunes\\:image')?.getAttribute('href') || '';
+      
+      // If no episode-specific image, get the channel/podcast image
+      if (!imageUrl) {
+        imageUrl = xml.querySelector('channel > image > url')?.textContent || '';
+      }
+      
       // Clean up description but preserve line breaks and list markers
       // This preserves <br> tags and whitespace before converting them to newlines
       let cleanDescription = description
@@ -56,7 +65,8 @@ export async function fetchEpisodes(): Promise<Episode[]> {
         publishDate: pubDate,
         duration,
         audioUrl,
-        episodeNumber: items.length - index // Assuming newest episodes come first
+        episodeNumber: items.length - index, // Assuming newest episodes come first
+        imageUrl // Add the image URL to the episode object
       };
     });
     
