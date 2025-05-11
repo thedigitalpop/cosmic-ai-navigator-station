@@ -33,12 +33,19 @@ export async function fetchEpisodes(): Promise<Episode[]> {
       const id = item.querySelector('guid')?.textContent || index.toString();
       
       // Extract image URL if available
-      // Try to get the episode-specific image from itunes:image
+      // First try to get the episode-specific image from itunes:image
       let imageUrl = item.querySelector('itunes\\:image')?.getAttribute('href') || '';
       
-      // If no episode-specific image, get the channel/podcast image
+      // If no episode-specific image, try the image tag within the item
       if (!imageUrl) {
-        imageUrl = xml.querySelector('channel > image > url')?.textContent || '';
+        const imageElement = item.querySelector('image') || item.querySelector('media\\:thumbnail');
+        imageUrl = imageElement?.getAttribute('url') || imageElement?.getAttribute('href') || '';
+      }
+      
+      // If still no image, fall back to the channel/podcast image
+      if (!imageUrl) {
+        imageUrl = xml.querySelector('channel > image > url')?.textContent || 
+                  xml.querySelector('channel > itunes\\:image')?.getAttribute('href') || '';
       }
       
       // Clean up description but preserve line breaks and list markers
