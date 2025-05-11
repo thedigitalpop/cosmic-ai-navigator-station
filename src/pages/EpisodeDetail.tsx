@@ -11,6 +11,7 @@ import EpisodeDescription from '../components/episode/EpisodeDescription';
 import EpisodeShare from '../components/episode/EpisodeShare';
 import EpisodeNotFound from '../components/episode/EpisodeNotFound';
 import YouTubeEmbed from '../components/episode/YouTubeEmbed';
+import DigitalPopCallout from '../components/episode/DigitalPopCallout';
 import { formatDate, formatDescription } from '../utils/formatters';
 
 const EpisodeDetail = () => {
@@ -61,6 +62,8 @@ const EpisodeDetail = () => {
                 description={episode.description} 
                 formatDescription={formatDescription} 
               />
+              
+              <DigitalPopCallout />
               
               <EpisodeShare />
             </div>

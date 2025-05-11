@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Twitter, Facebook, Instagram, Mail } from 'lucide-react';
+import { Twitter, Facebook, Instagram, Mail, ExternalLink } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -10,6 +10,16 @@ const Footer = () => {
           <h3 className="text-xl font-bold">AI Marketing Navigator</h3>
           <p className="text-sm opacity-80">
             Exploring the cosmic frontiers of AI marketing. Join us on this journey through stars, strategies, and success stories.
+          </p>
+          <p className="text-sm">
+            A podcast by <a 
+              href="https://thedigitalpop.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-bright-orange hover:underline inline-flex items-center"
+            >
+              Digital Pop <ExternalLink size={14} className="ml-1" />
+            </a>
           </p>
         </div>
         
@@ -52,7 +62,14 @@ const Footer = () => {
       </div>
       
       <div className="container mx-auto mt-8 pt-6 border-t border-white/20 text-sm opacity-70">
-        <p>© {new Date().getFullYear()} AI Marketing Navigator. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} AI Marketing Navigator by <a 
+          href="https://thedigitalpop.com" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-bright-orange hover:underline inline-flex items-center"
+        >
+          Digital Pop <ExternalLink size={14} className="ml-1" />
+        </a>. All rights reserved.</p>
       </div>
     </footer>
   );
