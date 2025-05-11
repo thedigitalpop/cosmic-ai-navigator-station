@@ -42,15 +42,19 @@ const EpisodeDetail = () => {
     }).format(date);
   };
   
-  // Function to convert URLs in text to actual clickable links
+  // Function to decode HTML entities and convert URLs to clickable links
   const formatDescription = (description: string): React.ReactNode => {
+    if (!description) return "";
+    
+    // Decode HTML entities (like &apos; to apostrophe)
+    const decodedText = decodeHtmlEntities(description);
+    
     // This regex matches URLs in text
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     
-    if (!description) return "";
-    
     // Split the description by paragraphs for better formatting
-    const paragraphs = description.split(/\n\n+/);
+    // Looking for multiple line breaks as paragraph separators
+    const paragraphs = decodedText.split(/\n\n+/);
     
     return (
       <>
@@ -78,10 +82,30 @@ const EpisodeDetail = () => {
             return part;
           });
           
-          return <p key={i} className="mb-4">{formatted}</p>;
+          // Handle single line breaks within paragraphs
+          const lines = formatted.map((item) => {
+            if (typeof item === 'string') {
+              return item.split('\n').map((line, k, array) => (
+                <React.Fragment key={k}>
+                  {line}
+                  {k < array.length - 1 && <br />}
+                </React.Fragment>
+              ));
+            }
+            return item;
+          });
+          
+          return <p key={i} className="mb-4">{lines}</p>;
         })}
       </>
     );
+  };
+  
+  // Function to decode HTML entities
+  const decodeHtmlEntities = (text: string): string => {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
   };
   
   return (

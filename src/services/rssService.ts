@@ -32,8 +32,9 @@ export async function fetchEpisodes(): Promise<Episode[]> {
       // Generate a unique ID
       const id = item.querySelector('guid')?.textContent || index.toString();
       
-      // Clean up description (remove HTML tags)
-      const cleanDescription = description.replace(/<[^>]*>?/gm, '');
+      // Clean up description (remove HTML tags but preserve line breaks)
+      const cleanDescription = description
+        .replace(/<\/?(?!br\s*\/?)[^>]+>/g, ''); // Remove HTML tags except <br>
       
       return {
         id: id,
