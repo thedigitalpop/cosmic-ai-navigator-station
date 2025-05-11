@@ -32,9 +32,22 @@ export async function fetchEpisodes(): Promise<Episode[]> {
       // Generate a unique ID
       const id = item.querySelector('guid')?.textContent || index.toString();
       
-      // Clean up description (remove HTML tags but preserve line breaks)
-      const cleanDescription = description
-        .replace(/<\/?(?!br\s*\/?)[^>]+>/g, ''); // Remove HTML tags except <br>
+      // Clean up description but preserve line breaks and list markers
+      // This preserves <br> tags and whitespace before converting them to newlines
+      let cleanDescription = description
+        .replace(/<br\s*\/?>/gi, '\n') // Replace <br> tags with newlines
+        .replace(/<p>/gi, '\n\n') // Replace paragraph openings with double newlines
+        .replace(/<\/p>/gi, '') // Remove paragraph closings
+        .replace(/<li>/gi, '\n- ') // Convert list items to markdown-style list items
+        .replace(/<\/li>/gi, '') // Remove list item closings
+        .replace(/<ul>|<\/ul>|<ol>|<\/ol>/gi, '\n') // Handle list containers
+        .replace(/<[^>]*>?/gm, '') // Remove remaining HTML tags
+        .replace(/&nbsp;/g, ' '); // Replace non-breaking spaces
+      
+      // Clean up extra whitespace while preserving intended line breaks
+      cleanDescription = cleanDescription
+        .replace(/\n{3,}/g, '\n\n') // Replace 3+ consecutive newlines with 2
+        .trim();
       
       return {
         id: id,
