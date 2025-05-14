@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -9,7 +9,10 @@ import { Button } from '@/components/ui/button';
 import { fetchEpisodes } from '../services/rssService';
 import { Episode } from '../components/EpisodeCard';
 import { saveEpisodeDetails, getCustomEpisodeDetails } from '../services/episodeService';
-import { toast } from 'sonner';
+import { useFileUpload } from '../hooks/use-file-upload';
+import { toast } from '@/components/ui/use-toast';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Upload, X } from 'lucide-react';
 
 const EpisodeManager = () => {
   const [episodes, setEpisodes] = useState<Episode[]>([]);
@@ -17,7 +20,10 @@ const EpisodeManager = () => {
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { uploadImage } = useFileUpload();
 
   useEffect(() => {
     const loadEpisodes = async () => {
@@ -52,8 +58,68 @@ const EpisodeManager = () => {
       }
     } catch (error) {
       console.error('Failed to load custom episode details:', error);
-      toast.error('Failed to load episode details');
+      toast({
+        title: "Error",
+        description: "Failed to load episode details",
+        variant: "destructive"
+      });
     }
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Invalid file",
+        description: "Please select an image file",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Check file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "File too large",
+        description: "Please select an image smaller than 5MB",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsUploading(true);
+    
+    try {
+      const imageUrl = await uploadImage(file);
+      setThumbnailUrl(imageUrl);
+      toast({
+        title: "Success",
+        description: "Image uploaded successfully",
+      });
+    } catch (error) {
+      console.error('Failed to upload image:', error);
+      toast({
+        title: "Error",
+        description: "Failed to upload image",
+        variant: "destructive"
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleImageRemove = () => {
+    setThumbnailUrl('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
   };
 
   const extractYoutubeId = (url: string) => {
@@ -84,12 +150,19 @@ const EpisodeManager = () => {
         thumbnailUrl,
         youtubeId: youtubeId || ''
       });
-      toast.success('Episode details saved successfully');
+      toast({
+        title: "Success",
+        description: "Episode details saved successfully"
+      });
       // Navigate to the episode page to see the changes
       navigate(`/episodes/${selectedEpisode.id}`);
     } catch (error) {
       console.error('Failed to save episode details:', error);
-      toast.error('Failed to save episode details');
+      toast({
+        title: "Error",
+        description: "Failed to save episode details",
+        variant: "destructive"
+      });
     }
   };
 
@@ -160,37 +233,60 @@ const EpisodeManager = () => {
                     </div>
                     
                     <div>
-                      <label className="block text-white mb-2">Thumbnail URL (16:9 recommended)</label>
-                      <Input
-                        value={thumbnailUrl}
-                        onChange={(e) => setThumbnailUrl(e.target.value)}
-                        placeholder="https://example.com/thumbnail.jpg"
-                        className="bg-white/10 border-secondary-purple/50 text-white"
+                      <label className="block text-white mb-2">Thumbnail Image (16:9 recommended)</label>
+                      
+                      {/* Hidden file input */}
+                      <input 
+                        type="file" 
+                        ref={fileInputRef} 
+                        onChange={handleFileChange} 
+                        accept="image/*" 
+                        className="hidden" 
                       />
-                      <p className="text-sm text-white/60 mt-1">
-                        Enter a URL for the episode thumbnail image
-                      </p>
+                      
+                      {/* Upload UI */}
+                      <div className="mt-2">
+                        {thumbnailUrl ? (
+                          <div className="relative rounded-md overflow-hidden">
+                            <AspectRatio ratio={16 / 9} className="bg-black/40">
+                              <img 
+                                src={thumbnailUrl} 
+                                alt="Episode thumbnail preview" 
+                                className="object-cover w-full h-full"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src = '/placeholder.svg';
+                                }}
+                              />
+                            </AspectRatio>
+                            <Button
+                              variant="destructive"
+                              size="icon"
+                              onClick={handleImageRemove}
+                              className="absolute top-2 right-2 h-8 w-8"
+                            >
+                              <X className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        ) : (
+                          <Button
+                            onClick={triggerFileInput}
+                            disabled={isUploading}
+                            variant="outline"
+                            className="w-full h-32 border-dashed border-secondary-purple/50 bg-black/20 hover:bg-black/30 text-white"
+                          >
+                            <div className="flex flex-col items-center">
+                              <Upload className="h-6 w-6 mb-2" />
+                              {isUploading ? 'Uploading...' : 'Click to upload thumbnail image'}
+                              <p className="text-xs text-white/60 mt-1">PNG, JPG or WebP up to 5MB</p>
+                            </div>
+                          </Button>
+                        )}
+                      </div>
                     </div>
                     
                     {/* Preview Section */}
                     <div className="border-t border-white/10 pt-6">
                       <h3 className="text-xl font-bold text-white mb-4">Preview</h3>
-                      
-                      {thumbnailUrl && (
-                        <div className="mb-4">
-                          <p className="text-white mb-2">Thumbnail:</p>
-                          <div className="aspect-w-16 aspect-h-9 bg-black/40 rounded-md overflow-hidden">
-                            <img 
-                              src={thumbnailUrl} 
-                              alt="Episode thumbnail preview" 
-                              className="object-cover w-full h-full"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).src = '/placeholder.svg';
-                              }}
-                            />
-                          </div>
-                        </div>
-                      )}
                       
                       {youtubeUrl && extractYoutubeId(youtubeUrl) && (
                         <div>
