@@ -9,12 +9,9 @@ const Header: React.FC = () => {
   
   // Check if we're in the Lovable environment
   useEffect(() => {
-    // Check if the URL contains lovable.dev, lovable.app, or localhost
-    const isLovable = window.location.hostname.includes('lovable.dev') || 
-                      window.location.hostname.includes('lovable.app') || 
-                      window.location.hostname === 'localhost' ||
-                      window.location.hostname === '127.0.0.1';
-    setIsLovableEnvironment(isLovable);
+    // Always show the episode manager link for development purposes
+    // This makes it easier to access during development
+    setIsLovableEnvironment(true);
   }, []);
   
   return (
