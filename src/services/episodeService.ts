@@ -3,6 +3,7 @@ interface CustomEpisodeDetails {
   youtubeUrl?: string;
   youtubeId?: string;
   thumbnailUrl?: string;
+  slug?: string;
 }
 
 // Local storage key prefix
@@ -43,6 +44,7 @@ export async function enhanceEpisodeWithCustomDetails(episode: any): Promise<any
         ...episode,
         youtubeId: customDetails.youtubeId || episode.youtubeId,
         imageUrl: customDetails.thumbnailUrl || episode.imageUrl,
+        slug: customDetails.slug,
       };
     }
     

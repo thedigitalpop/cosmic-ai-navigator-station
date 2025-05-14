@@ -23,7 +23,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/episodes" element={<Episodes />} />
-          <Route path="/episodes/:id" element={<EpisodeDetail />} />
+          <Route path="/podcasts/:slug" element={<EpisodeDetail />} />
+          <Route path="/episodes/:id" element={<EpisodeDetail />} /> {/* Keep for backward compatibility */}
           <Route path="/episode-manager" element={<EpisodeManager />} />
           <Route path="/about" element={<About />} />
           <Route path="/subscribe" element={<Subscribe />} />

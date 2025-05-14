@@ -1,6 +1,7 @@
 
 import { Episode } from '../components/EpisodeCard';
 import { enhanceEpisodeWithCustomDetails } from './episodeService';
+import { createSlugFromTitle } from '../utils/urlUtils';
 
 // Function to fetch and parse the RSS feed
 export async function fetchEpisodes(): Promise<Episode[]> {
@@ -32,6 +33,12 @@ export async function fetchEpisodes(): Promise<Episode[]> {
       
       // Generate a unique ID
       const id = item.querySelector('guid')?.textContent || index.toString();
+      
+      // Calculate episode number
+      const episodeNumber = items.length - index; // Assuming newest episodes come first
+      
+      // Generate slug
+      const slug = createSlugFromTitle(title, episodeNumber);
       
       // Extract image URL if available
       // First try to get the episode-specific image from itunes:image
@@ -76,9 +83,10 @@ export async function fetchEpisodes(): Promise<Episode[]> {
         publishDate: pubDate,
         duration,
         audioUrl,
-        episodeNumber: items.length - index, // Assuming newest episodes come first
+        episodeNumber,
         imageUrl, // Add the image URL to the episode object
-        youtubeId // Add the YouTube ID to the episode object
+        youtubeId, // Add the YouTube ID to the episode object
+        slug      // Add the slug to the episode object
       };
     });
     

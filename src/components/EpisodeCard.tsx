@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../utils/formatters';
+import { createSlugFromTitle } from '../utils/urlUtils';
 
 export interface Episode {
   id: string;
@@ -13,6 +14,7 @@ export interface Episode {
   episodeNumber: number;
   imageUrl?: string;
   youtubeId?: string | null;
+  slug?: string;
 }
 
 interface EpisodeCardProps {
@@ -20,6 +22,9 @@ interface EpisodeCardProps {
 }
 
 const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
+  // Generate slug if not already present
+  const slug = episode.slug || createSlugFromTitle(episode.title, episode.episodeNumber);
+  
   return (
     <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30 h-full flex flex-col">
       {/* Episode Image */}
@@ -56,7 +61,7 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
       </p>
       
       {/* Listen Now Button */}
-      <Link to={`/episodes/${episode.id}`} className="text-bright-orange hover:underline mt-auto">
+      <Link to={`/podcasts/${slug}`} className="text-bright-orange hover:underline mt-auto">
         Listen Now
       </Link>
       

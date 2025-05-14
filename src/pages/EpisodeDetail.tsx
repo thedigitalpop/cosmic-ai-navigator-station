@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AudioPlayer from '../components/AudioPlayer';
-import { fetchEpisodeById } from '../services/rssService';
+import { fetchEpisodeById, fetchEpisodes } from '../services/rssService';
 import { Episode } from '../components/EpisodeCard';
 import EpisodeHeader from '../components/episode/EpisodeHeader';
 import EpisodeDescription from '../components/episode/EpisodeDescription';
@@ -13,18 +13,45 @@ import EpisodeNotFound from '../components/episode/EpisodeNotFound';
 import YouTubeEmbed from '../components/episode/YouTubeEmbed';
 import DigitalPopCallout from '../components/episode/DigitalPopCallout';
 import { formatDate, formatDescription } from '../utils/formatters';
+import { createSlugFromTitle, getEpisodeIdFromSlug } from '../utils/urlUtils';
 
 const EpisodeDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  // We now support both URL formats: /episodes/:id and /podcasts/:slug
+  const { id, slug } = useParams<{ id?: string; slug?: string }>();
   const [episode, setEpisode] = useState<Episode | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [redirect, setRedirect] = useState<string | null>(null);
   
   useEffect(() => {
     const loadEpisode = async () => {
-      if (!id) return;
-      
       try {
-        const fetchedEpisode = await fetchEpisodeById(id);
+        let fetchedEpisode: Episode | undefined;
+        
+        if (id) {
+          // If we have an ID, fetch by ID
+          fetchedEpisode = await fetchEpisodeById(id);
+          
+          // If found, redirect to the new URL format if this is from the old URL pattern
+          if (fetchedEpisode && window.location.pathname.startsWith('/episodes/')) {
+            const newSlug = fetchedEpisode.slug || createSlugFromTitle(fetchedEpisode.title, fetchedEpisode.episodeNumber);
+            setRedirect(`/podcasts/${newSlug}`);
+            return;
+          }
+        } else if (slug) {
+          // If we have a slug, first try to find the episode ID from custom details
+          const episodeId = getEpisodeIdFromSlug(slug);
+          
+          if (episodeId) {
+            fetchedEpisode = await fetchEpisodeById(episodeId);
+          } else {
+            // If not found in custom details, fetch all episodes and find by generating a slug
+            const allEpisodes = await fetchEpisodes();
+            fetchedEpisode = allEpisodes.find(ep => 
+              slug === createSlugFromTitle(ep.title, ep.episodeNumber)
+            );
+          }
+        }
+        
         if (fetchedEpisode) {
           setEpisode(fetchedEpisode);
         }
@@ -36,7 +63,12 @@ const EpisodeDetail = () => {
     };
     
     loadEpisode();
-  }, [id]);
+  }, [id, slug]);
+  
+  // Handle redirect to the new URL format
+  if (redirect) {
+    return <Navigate to={redirect} replace />;
+  }
   
   return (
     <div className="min-h-screen flex flex-col bg-space-gradient bg-fixed">
