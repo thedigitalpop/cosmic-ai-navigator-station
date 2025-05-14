@@ -1,10 +1,21 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLovableEnvironment, setIsLovableEnvironment] = useState(false);
+  
+  // Check if we're in the Lovable environment
+  useEffect(() => {
+    // Check if the URL contains lovable.dev, lovable.app, or localhost
+    const isLovable = window.location.hostname.includes('lovable.dev') || 
+                      window.location.hostname.includes('lovable.app') || 
+                      window.location.hostname === 'localhost' ||
+                      window.location.hostname === '127.0.0.1';
+    setIsLovableEnvironment(isLovable);
+  }, []);
   
   return (
     <header className="bg-black/30 backdrop-blur-sm sticky top-0 z-50">
@@ -56,14 +67,16 @@ const Header: React.FC = () => {
           >
             Subscribe
           </NavLink>
-          <NavLink 
-            to="/episode-manager" 
-            className={({ isActive }) => 
-              isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
-            }
-          >
-            Manage Episodes
-          </NavLink>
+          {isLovableEnvironment && (
+            <NavLink 
+              to="/episode-manager" 
+              className={({ isActive }) => 
+                isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+              }
+            >
+              Manage Episodes
+            </NavLink>
+          )}
           <a 
             href="https://digitalpop.online" 
             target="_blank"
@@ -115,15 +128,17 @@ const Header: React.FC = () => {
             >
               Subscribe
             </NavLink>
-            <NavLink 
-              to="/episode-manager" 
-              className={({ isActive }) => 
-                isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
-              }
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Manage Episodes
-            </NavLink>
+            {isLovableEnvironment && (
+              <NavLink 
+                to="/episode-manager" 
+                className={({ isActive }) => 
+                  isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Manage Episodes
+              </NavLink>
+            )}
             <a 
               href="https://digitalpop.online" 
               target="_blank"
