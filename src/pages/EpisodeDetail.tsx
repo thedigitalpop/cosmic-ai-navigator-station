@@ -48,7 +48,7 @@ const EpisodeDetail = () => {
             // If not found in custom details, fetch all episodes and find by generating a slug
             const allEpisodes = await fetchEpisodes();
             fetchedEpisode = allEpisodes.find(ep => 
-              slug === createSlugFromTitle(ep.title, ep.episodeNumber)
+              slug === (ep.slug || createSlugFromTitle(ep.title, ep.episodeNumber))
             );
           }
         }
