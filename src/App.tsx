@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Episodes from "./pages/Episodes";
 import EpisodeDetail from "./pages/EpisodeDetail";
+import EpisodeManager from "./pages/EpisodeManager";
 import About from "./pages/About";
 import Subscribe from "./pages/Subscribe";
 import NotFound from "./pages/NotFound";
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/episodes" element={<Episodes />} />
           <Route path="/episodes/:id" element={<EpisodeDetail />} />
+          <Route path="/episode-manager" element={<EpisodeManager />} />
           <Route path="/about" element={<About />} />
           <Route path="/subscribe" element={<Subscribe />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

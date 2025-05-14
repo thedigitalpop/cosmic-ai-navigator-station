@@ -1,70 +1,141 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Home, Headphones, Book, Podcast, Rocket } from 'lucide-react';
+import React, { useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
-const Header = () => {
+const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   return (
-    <header className="bg-primary-purple text-white py-4 px-6 sticky top-0 z-50">
-      <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
-        <div className="flex flex-col items-center sm:items-start mb-4 sm:mb-0">
-          <Link to="/" className="flex items-center space-x-2 text-xl font-bold">
-            <Rocket className="h-6 w-6" />
-            <span>AI Marketing Navigator</span>
-          </Link>
-          <div className="text-sm text-white/80 mt-1">
-            by <a 
-              href="https://thedigitalpop.com" 
-              target="_blank" 
+    <header className="bg-black/30 backdrop-blur-sm sticky top-0 z-50">
+      <div className="container mx-auto flex justify-between items-center p-4">
+        {/* Logo */}
+        <Link to="/" className="text-white font-bold text-2xl">
+          AI Marketing<span className="text-bright-orange">Navigator</span>
+        </Link>
+        
+        {/* Mobile Menu Button */}
+        <button 
+          className="lg:hidden text-white"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+        
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-8">
+          <NavLink 
+            to="/" 
+            className={({ isActive }) => 
+              isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink 
+            to="/episodes" 
+            className={({ isActive }) => 
+              isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+            }
+          >
+            Episodes
+          </NavLink>
+          <NavLink 
+            to="/about" 
+            className={({ isActive }) => 
+              isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+            }
+          >
+            About
+          </NavLink>
+          <NavLink 
+            to="/subscribe" 
+            className={({ isActive }) => 
+              isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+            }
+          >
+            Subscribe
+          </NavLink>
+          <NavLink 
+            to="/episode-manager" 
+            className={({ isActive }) => 
+              isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+            }
+          >
+            Manage Episodes
+          </NavLink>
+          <a 
+            href="https://digitalpop.online" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-bright-orange hover:text-bright-orange/80 transition-colors"
+          >
+            Digital Pop
+          </a>
+        </nav>
+      </div>
+      
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="lg:hidden bg-space-gradient absolute w-full">
+          <nav className="flex flex-col space-y-4 p-6">
+            <NavLink 
+              to="/" 
+              className={({ isActive }) => 
+                isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+              }
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </NavLink>
+            <NavLink 
+              to="/episodes" 
+              className={({ isActive }) => 
+                isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+              }
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Episodes
+            </NavLink>
+            <NavLink 
+              to="/about" 
+              className={({ isActive }) => 
+                isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+              }
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About
+            </NavLink>
+            <NavLink 
+              to="/subscribe" 
+              className={({ isActive }) => 
+                isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+              }
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Subscribe
+            </NavLink>
+            <NavLink 
+              to="/episode-manager" 
+              className={({ isActive }) => 
+                isActive ? "text-bright-orange" : "text-white hover:text-bright-orange transition-colors"
+              }
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Manage Episodes
+            </NavLink>
+            <a 
+              href="https://digitalpop.online" 
+              target="_blank"
               rel="noopener noreferrer"
-              className="text-bright-orange hover:underline"
+              className="text-bright-orange hover:text-bright-orange/80 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
             >
               Digital Pop
             </a>
-          </div>
+          </nav>
         </div>
-        
-        <nav>
-          <ul className="flex space-x-1 sm:space-x-8">
-            <li>
-              <Link 
-                to="/" 
-                className="flex flex-col sm:flex-row items-center p-2 hover:bg-vivid-purple rounded-md transition-colors"
-              >
-                <Home className="h-5 w-5 sm:mr-1" />
-                <span>Home</span>
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/episodes" 
-                className="flex flex-col sm:flex-row items-center p-2 hover:bg-vivid-purple rounded-md transition-colors"
-              >
-                <Headphones className="h-5 w-5 sm:mr-1" />
-                <span>Episodes</span>
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/about" 
-                className="flex flex-col sm:flex-row items-center p-2 hover:bg-vivid-purple rounded-md transition-colors"
-              >
-                <Book className="h-5 w-5 sm:mr-1" />
-                <span>About</span>
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/subscribe" 
-                className="flex flex-col sm:flex-row items-center p-2 hover:bg-vivid-purple rounded-md transition-colors"
-              >
-                <Podcast className="h-5 w-5 sm:mr-1" />
-                <span>Subscribe</span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      )}
     </header>
   );
 };

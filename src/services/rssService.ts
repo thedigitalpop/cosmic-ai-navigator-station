@@ -1,5 +1,6 @@
 
 import { Episode } from '../components/EpisodeCard';
+import { enhanceEpisodeWithCustomDetails } from './episodeService';
 
 // Function to fetch and parse the RSS feed
 export async function fetchEpisodes(): Promise<Episode[]> {
@@ -81,7 +82,12 @@ export async function fetchEpisodes(): Promise<Episode[]> {
       };
     });
     
-    return episodes;
+    // Enhance episodes with custom details from local storage
+    const enhancedEpisodes = await Promise.all(
+      episodes.map(episode => enhanceEpisodeWithCustomDetails(episode))
+    );
+    
+    return enhancedEpisodes;
   } catch (error) {
     console.error('Failed to fetch RSS feed:', error);
     return [];

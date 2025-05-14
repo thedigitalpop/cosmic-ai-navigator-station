@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../utils/formatters';
@@ -20,15 +21,24 @@ interface EpisodeCardProps {
 
 const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
   return (
-    <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30">
+    <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30 h-full flex flex-col">
       {/* Episode Image */}
-      {episode.imageUrl && (
-        <img 
-          src={episode.imageUrl} 
-          alt={`${episode.title} thumbnail`} 
-          className="w-full h-48 object-cover rounded-lg mb-4" 
-        />
-      )}
+      <div className="mb-4 aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+        {episode.imageUrl ? (
+          <img 
+            src={episode.imageUrl} 
+            alt={`${episode.title} thumbnail`} 
+            className="w-full h-full object-cover rounded-lg" 
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/placeholder.svg';
+            }}
+          />
+        ) : (
+          <div className="w-full h-full bg-vivid-purple/20 rounded-lg flex items-center justify-center">
+            <span className="text-white/60">No Image</span>
+          </div>
+        )}
+      </div>
       
       {/* Episode Title */}
       <h3 className="text-xl font-bold text-white mb-2">{episode.title}</h3>
@@ -41,17 +51,23 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
       </div>
       
       {/* Episode Description (limited to 2 lines) */}
-      <p className="text-white/80 leading-relaxed mb-4 line-clamp-2">
+      <p className="text-white/80 leading-relaxed mb-4 line-clamp-2 flex-grow">
         {episode.description}
       </p>
       
       {/* Listen Now Button */}
-      <Link to={`/episodes/${episode.id}`} className="text-bright-orange hover:underline">
+      <Link to={`/episodes/${episode.id}`} className="text-bright-orange hover:underline mt-auto">
         Listen Now
       </Link>
+      
+      {/* YouTube Indicator */}
+      {episode.youtubeId && (
+        <div className="mt-2 text-xs text-white/60">
+          <span className="bg-red-600 text-white px-2 py-0.5 rounded-sm">YouTube</span>
+        </div>
+      )}
     </div>
   );
 };
 
 export default EpisodeCard;
-
