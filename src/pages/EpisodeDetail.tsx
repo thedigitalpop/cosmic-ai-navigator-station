@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
+import { toast } from "@/hooks/use-toast";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AudioPlayer from '../components/AudioPlayer';
@@ -54,6 +55,14 @@ const EpisodeDetail = () => {
         
         if (fetchedEpisode) {
           setEpisode(fetchedEpisode);
+          
+          // Show toast if this episode has a YouTube video
+          if (fetchedEpisode.youtubeId) {
+            toast({
+              title: "Video Available",
+              description: "This episode includes a YouTube video you can watch below.",
+            });
+          }
         }
         setIsLoading(false);
       } catch (error) {

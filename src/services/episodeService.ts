@@ -33,7 +33,7 @@ export async function getCustomEpisodeDetails(episodeId: string): Promise<Custom
   }
 }
 
-// Update the RSS service with custom details
+// Update the episode with custom details
 export async function enhanceEpisodeWithCustomDetails(episode: any): Promise<any> {
   try {
     const customDetails = await getCustomEpisodeDetails(episode.id);
@@ -44,7 +44,7 @@ export async function enhanceEpisodeWithCustomDetails(episode: any): Promise<any
         ...episode,
         youtubeId: customDetails.youtubeId || episode.youtubeId,
         imageUrl: customDetails.thumbnailUrl || episode.imageUrl,
-        slug: customDetails.slug,
+        slug: customDetails.slug || episode.slug,
       };
     }
     

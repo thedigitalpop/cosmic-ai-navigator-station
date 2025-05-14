@@ -2,6 +2,7 @@
 import { Episode } from '../components/EpisodeCard';
 import { enhanceEpisodeWithCustomDetails } from './episodeService';
 import { createSlugFromTitle } from '../utils/urlUtils';
+import { extractYoutubeId } from '../utils/youtubeUtils';
 
 // Function to fetch and parse the RSS feed
 export async function fetchEpisodes(): Promise<Episode[]> {
@@ -56,9 +57,6 @@ export async function fetchEpisodes(): Promise<Episode[]> {
                   xml.querySelector('channel > itunes\\:image')?.getAttribute('href') || '';
       }
       
-      // Extract YouTube video ID from description
-      const youtubeId = extractYoutubeId(description);
-      
       // Clean up description but preserve line breaks and list markers
       // This preserves <br> tags and whitespace before converting them to newlines
       let cleanDescription = description
@@ -85,7 +83,7 @@ export async function fetchEpisodes(): Promise<Episode[]> {
         audioUrl,
         episodeNumber,
         imageUrl, // Add the image URL to the episode object
-        youtubeId, // Add the YouTube ID to the episode object
+        youtubeId: null, // Will be populated from custom details
         slug      // Add the slug to the episode object
       };
     });
@@ -100,30 +98,6 @@ export async function fetchEpisodes(): Promise<Episode[]> {
     console.error('Failed to fetch RSS feed:', error);
     return [];
   }
-}
-
-// Function to extract YouTube video ID from text
-function extractYoutubeId(text: string): string | null {
-  if (!text) return null;
-  
-  // Common YouTube URL patterns
-  const patterns = [
-    // youtu.be short links
-    /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]{11})/i,
-    // youtube.com/watch?v= format
-    /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/i,
-    // youtube.com/embed/ format
-    /(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/i
-  ];
-  
-  for (const pattern of patterns) {
-    const match = text.match(pattern);
-    if (match && match[1]) {
-      return match[1];
-    }
-  }
-  
-  return null;
 }
 
 // Function to fetch a specific episode by ID
