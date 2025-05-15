@@ -26,52 +26,57 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
   const slug = episode.slug || createSlugFromTitle(episode.title, episode.episodeNumber);
   
   return (
-    <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30 h-full flex flex-col">
-      {/* Episode Image */}
-      <div className="mb-4 aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-        {episode.imageUrl ? (
-          <img 
-            src={episode.imageUrl} 
-            alt={`${episode.title} thumbnail`} 
-            className="w-full h-full object-cover rounded-lg" 
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = '/placeholder.svg';
-            }}
-          />
-        ) : (
-          <div className="w-full h-full bg-vivid-purple/20 rounded-lg flex items-center justify-center">
-            <span className="text-white/60">No Image</span>
+    <Link 
+      to={`/podcasts/${slug}`} 
+      className="block h-full"
+    >
+      <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30 h-full flex flex-col transition-all duration-300 hover:bg-white/10 hover:border-vivid-purple/60 hover:shadow-lg hover:shadow-vivid-purple/20">
+        {/* Episode Image */}
+        <div className="mb-4 aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+          {episode.imageUrl ? (
+            <img 
+              src={episode.imageUrl} 
+              alt={`${episode.title} thumbnail`} 
+              className="w-full h-full object-cover rounded-lg" 
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = '/placeholder.svg';
+              }}
+            />
+          ) : (
+            <div className="w-full h-full bg-vivid-purple/20 rounded-lg flex items-center justify-center">
+              <span className="text-white/60">No Image</span>
+            </div>
+          )}
+        </div>
+        
+        {/* Episode Title */}
+        <h3 className="text-xl font-bold text-white mb-2">{episode.title}</h3>
+        
+        {/* Episode Date and Duration */}
+        <div className="text-white/60 text-sm mb-4">
+          <span>{formatDate(episode.publishDate)}</span>
+          <span className="mx-2">•</span>
+          <span>{episode.duration}</span>
+        </div>
+        
+        {/* Episode Description (limited to 2 lines) */}
+        <p className="text-white/80 leading-relaxed mb-4 line-clamp-2 flex-grow">
+          {episode.description}
+        </p>
+        
+        {/* Listen Now Button */}
+        <div className="text-bright-orange hover:underline mt-auto">
+          Listen Now
+        </div>
+        
+        {/* YouTube Indicator */}
+        {episode.youtubeId && (
+          <div className="mt-2 text-xs text-white/60">
+            <span className="bg-red-600 text-white px-2 py-0.5 rounded-sm">YouTube</span>
           </div>
         )}
       </div>
-      
-      {/* Episode Title */}
-      <h3 className="text-xl font-bold text-white mb-2">{episode.title}</h3>
-      
-      {/* Episode Date and Duration */}
-      <div className="text-white/60 text-sm mb-4">
-        <span>{formatDate(episode.publishDate)}</span>
-        <span className="mx-2">•</span>
-        <span>{episode.duration}</span>
-      </div>
-      
-      {/* Episode Description (limited to 2 lines) */}
-      <p className="text-white/80 leading-relaxed mb-4 line-clamp-2 flex-grow">
-        {episode.description}
-      </p>
-      
-      {/* Listen Now Button */}
-      <Link to={`/podcasts/${slug}`} className="text-bright-orange hover:underline mt-auto">
-        Listen Now
-      </Link>
-      
-      {/* YouTube Indicator */}
-      {episode.youtubeId && (
-        <div className="mt-2 text-xs text-white/60">
-          <span className="bg-red-600 text-white px-2 py-0.5 rounded-sm">YouTube</span>
-        </div>
-      )}
-    </div>
+    </Link>
   );
 };
 
