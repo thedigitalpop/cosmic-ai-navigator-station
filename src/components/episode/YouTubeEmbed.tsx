@@ -11,12 +11,12 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({ videoId }) => {
   if (!videoId) return null;
 
   return (
-    <div className="mb-8">
+    <div>
       <div className="flex items-center gap-2 mb-4">
-        <Youtube className="h-5 w-5 text-red-500" />
-        <h2 className="text-2xl font-bold text-white">Watch This Episode</h2>
+        <Youtube className="h-6 w-6 text-red-500" />
+        <h2 className="text-2xl font-bold text-white">Watch Episode</h2>
       </div>
-      <div className="rounded-lg overflow-hidden border border-white/10">
+      <div className="rounded-lg overflow-hidden border-2 border-bright-orange/30 shadow-lg shadow-bright-orange/10">
         <AspectRatio ratio={16 / 9}>
           <iframe
             src={`https://www.youtube.com/embed/${videoId}`}

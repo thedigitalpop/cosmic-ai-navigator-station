@@ -91,13 +91,16 @@ const EpisodeDetail = () => {
             <div className="bg-white/5 animate-pulse h-64 rounded-xl p-6"></div>
           ) : episode ? (
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30">
+              {/* Display YouTube video first if available */}
+              {episode.youtubeId && (
+                <div className="mb-8">
+                  <YouTubeEmbed videoId={episode.youtubeId} />
+                </div>
+              )}
+              
               <div className="mb-8">
                 <AudioPlayer audioUrl={episode.audioUrl} title={episode.title} />
               </div>
-              
-              {episode.youtubeId && (
-                <YouTubeEmbed videoId={episode.youtubeId} />
-              )}
               
               <EpisodeDescription 
                 description={episode.description} 
