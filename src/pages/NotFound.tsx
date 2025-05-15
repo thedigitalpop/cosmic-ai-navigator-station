@@ -1,15 +1,44 @@
-import { useLocation } from "react-router-dom";
+
+import { useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
+
+// List of paths that should redirect to the homepage
+const redirectPaths = [
+  "/ai-agent-consulting",
+  "/articles",
+  "/artificial-intelligence-services",
+  "/business-ai-coaching",
+  "/enterprise-ai-implementation",
+  "/full-service-digital-marketing",
+  "/other-digital-services",
+  "/personal-ai-coaching",
+  "/portfolio",
+  "/services",
+  "/wordpress-consulting",
+  "/wordpress-development",
+  "/wordpress-hosting-maintenance",
+  "/wordpress-services",
+];
 
 const NotFound = () => {
   const location = useLocation();
+  const currentPath = location.pathname;
 
   useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
-  }, [location.pathname]);
+    // Only log error if it's not a redirect path
+    if (!redirectPaths.includes(currentPath)) {
+      console.error(
+        "404 Error: User attempted to access non-existent route:",
+        currentPath
+      );
+    }
+  }, [currentPath]);
+
+  // Check if the current path is in our redirect list
+  if (redirectPaths.includes(currentPath)) {
+    console.log(`Redirecting from ${currentPath} to homepage`);
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
