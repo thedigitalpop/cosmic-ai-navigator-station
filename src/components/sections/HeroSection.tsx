@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -24,6 +23,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({ latestEpisode, isLoading }) =
       <div className="absolute top-40 right-1/3 w-1 h-1 bg-white rounded-full animate-float-slow"></div>
       <div className="absolute bottom-32 left-1/3 w-1 h-1 bg-white rounded-full animate-float-slower"></div>
       <div className="absolute top-60 right-1/4 w-2 h-2 bg-white rounded-full animate-float"></div>
+      
+      {/* Additional star dots */}
+      <div className="absolute top-28 left-1/6 w-1.5 h-1.5 bg-white rounded-full animate-float-slow"></div>
+      <div className="absolute top-44 left-2/3 w-1 h-1 bg-white opacity-70 rounded-full animate-float-slower"></div>
+      <div className="absolute top-72 left-1/2 w-2 h-2 bg-white opacity-60 rounded-full animate-float"></div>
+      <div className="absolute bottom-40 right-1/5 w-1.5 h-1.5 bg-white rounded-full animate-float-slow"></div>
+      <div className="absolute bottom-56 left-1/5 w-1 h-1 bg-white opacity-80 rounded-full animate-float"></div>
+      <div className="absolute top-36 left-3/4 w-1 h-1 bg-white rounded-full animate-float-slower"></div>
+      <div className="absolute top-80 right-2/3 w-1.5 h-1.5 bg-white opacity-70 rounded-full animate-float"></div>
+      <div className="absolute bottom-64 right-1/4 w-1 h-1 bg-white opacity-60 rounded-full animate-float-slow"></div>
       
       {/* Floating planets */}
       <img 
