@@ -14,10 +14,13 @@ const AboutSection: React.FC = () => {
             <div>
               <h2 className="text-3xl font-bold text-white mb-4">About The Podcast</h2>
               <p className="text-white/80 mb-4">
-                The AI Marketing Navigator podcast takes you on a journey through the cosmos of artificial intelligence in marketing. Each episode explores new frontiers and provides actionable insights to help your business thrive in this rapidly evolving landscape.
+                The AI Marketing Navigator is your compass in the complex journey of artificial intelligence in marketing. 
+                Hosted by Alex Carlson, each episode explores new frontiers and provides actionable insights to help your business 
+                thrive in this rapidly evolving landscape.
               </p>
               <p className="text-white/80 mb-2">
-                Whether you're new to AI marketing or an experienced navigator, our mission is to guide you to success in this exciting new universe.
+                Whether you're new to AI marketing or an experienced navigator, our mission is to guide you to success 
+                as we help you "keep navigating the AI revolution!"
               </p>
               <p className="text-white/80 mb-6">
                 <span className="font-medium">AI Marketing Navigator</span> is produced by <a 

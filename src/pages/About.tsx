@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { Rocket, Star, Navigation } from 'lucide-react';
+import { Rocket, Star, Navigation, MessageSquare, Book, Users } from 'lucide-react';
 
 const About = () => {
   const navigate = useNavigate();
@@ -15,18 +15,21 @@ const About = () => {
       
       <main className="flex-grow py-16 px-6">
         <div className="container mx-auto">
-          <h1 className="text-4xl font-bold text-white mb-8 text-center">About AI Marketing Navigator</h1>
+          <h1 className="text-4xl font-bold text-white mb-8 text-center">Welcome to The AI Marketing Navigator!</h1>
           
           {/* Mission Section */}
           <div className="bg-secondary-purple/20 backdrop-blur-sm rounded-2xl p-8 border border-vivid-purple/30 mb-12">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-3xl font-bold text-white mb-4">Our Mission</h2>
+                <h2 className="text-3xl font-bold text-white mb-4">About The AI Marketing Navigator</h2>
                 <p className="text-white/80 mb-4">
-                  At AI Marketing Navigator, our mission is to demystify the complex world of AI marketing and make it accessible to businesses of all sizes. We believe that artificial intelligence is revolutionizing the marketing landscape, and we're here to be your guide through this new frontier.
+                  Navigating the rapidly evolving landscape of Artificial Intelligence in marketing can be complex. 
+                  <span className="font-bold"> The AI Marketing Navigator</span> is your compass in this journey, dedicated to simplifying AI marketing 
+                  to help you stay ahead of the curve.
                 </p>
                 <p className="text-white/80">
-                  Through in-depth interviews, case studies, and practical advice, we help marketers understand how to leverage AI tools effectively, ethically, and strategically.
+                  Hosted by Alex Carlson, this podcast aims to be your guide through the ever-shifting world of AI marketing, 
+                  offering valuable insights, practical tips, cutting-edge tools, and effective strategies.
                 </p>
               </div>
               
@@ -46,10 +49,12 @@ const About = () => {
               <div className="md:order-2">
                 <h2 className="text-3xl font-bold text-white mb-4">Your Host</h2>
                 <p className="text-white/80 mb-4">
-                  Meet Captain AI (aka Alex Innovations), your guide through the cosmos of AI marketing. With over a decade of experience in digital marketing and a passion for emerging technologies, Alex brings expert insights and a sense of adventure to each episode.
+                  Meet Alex Carlson, your guide through the cosmos of AI marketing. With expertise in digital marketing 
+                  and a passion for emerging technologies, Alex brings expert insights and a sense of adventure to each episode.
                 </p>
                 <p className="text-white/80">
-                  As an early adopter of AI marketing tools and strategies, Alex has helped numerous businesses transform their marketing approach and achieve stellar results in this new frontier.
+                  Whether you're looking to understand new AI technologies, implement them in your marketing efforts, 
+                  or explore their broader implications, The AI Marketing Navigator is here to help you "keep navigating the AI revolution!"
                 </p>
               </div>
               
@@ -63,18 +68,38 @@ const About = () => {
             </div>
           </div>
           
-          {/* Topics Section */}
+          {/* What to Expect Section */}
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-white mb-6 text-center">Cosmic Topics We Explore</h2>
+            <h2 className="text-3xl font-bold text-white mb-6 text-center">What to Expect</h2>
             
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30">
                 <div className="bg-vivid-purple rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                  <Book className="text-white" size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">In-depth Discussions</h3>
+                <p className="text-white/80">
+                  Explore the latest AI news, tools (ChatGPT, HeyGen, ElevenLabs, and more), and their practical applications for marketers.
+                </p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30">
+                <div className="bg-vivid-purple rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                  <Users className="text-white" size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Expert Interviews</h3>
+                <p className="text-white/80">
+                  Hear from leading experts in AI, marketing, and cybersecurity who share their knowledge and experience.
+                </p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30">
+                <div className="bg-vivid-purple rounded-full w-12 h-12 flex items-center justify-center mb-4">
                   <Rocket className="text-white" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">AI Strategy</h3>
+                <h3 className="text-xl font-bold text-white mb-2">Practical Guides</h3>
                 <p className="text-white/80">
-                  Building comprehensive AI-powered marketing strategies that propel brands forward.
+                  Learn through detailed walkthroughs, such as how to create your own AI-generated content.
                 </p>
               </div>
               
@@ -82,9 +107,9 @@ const About = () => {
                 <div className="bg-vivid-purple rounded-full w-12 h-12 flex items-center justify-center mb-4">
                   <Star className="text-white" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Content Creation</h3>
+                <h3 className="text-xl font-bold text-white mb-2">Thoughtful Analysis</h3>
                 <p className="text-white/80">
-                  Using AI tools to create engaging, personalized content at scale.
+                  Engage with discussions on the ethical considerations of AI and the importance of transparency in its use.
                 </p>
               </div>
               
@@ -92,11 +117,41 @@ const About = () => {
                 <div className="bg-vivid-purple rounded-full w-12 h-12 flex items-center justify-center mb-4">
                   <Navigation className="text-white" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Data Analysis</h3>
+                <h3 className="text-xl font-bold text-white mb-2">Digest Episodes</h3>
                 <p className="text-white/80">
-                  Leveraging AI for deeper insights and more effective campaign optimization.
+                  Get updates on significant developments in the AI space and stay informed of the latest trends.
                 </p>
               </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30">
+                <div className="bg-vivid-purple rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                  <MessageSquare className="text-white" size={24} />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Community Focus</h3>
+                <p className="text-white/80">
+                  We value our listener community and encourage feedback and engagement as we explore AI together.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Digital Pop Section */}
+          <div className="bg-vivid-purple/20 backdrop-blur-sm rounded-2xl p-8 border border-vivid-purple/30 mb-12">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-white mb-4">Brought to You By Digital Pop</h2>
+              <p className="text-white/80 mb-6 max-w-2xl mx-auto">
+                This podcast is brought to you by Digital Pop, which focuses on delivering AI marketing automation 
+                to help small businesses thrive. We're committed to sharing knowledge and fostering understanding 
+                in the dynamic field of AI.
+              </p>
+              <a 
+                href="https://thedigitalpop.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-bright-orange hover:underline text-lg font-medium"
+              >
+                Visit Digital Pop
+              </a>
             </div>
           </div>
           
@@ -104,7 +159,7 @@ const About = () => {
           <div className="text-center">
             <h2 className="text-3xl font-bold text-white mb-6">Ready to Begin Your Journey?</h2>
             <p className="text-white/80 mb-8 max-w-2xl mx-auto">
-              Join us as we navigate the exciting universe of AI marketing together. Subscribe to the podcast and never miss an episode.
+              Join us as we explore the exciting possibilities and navigate the challenges of AI in marketing together!
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button 
