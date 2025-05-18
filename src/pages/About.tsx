@@ -170,7 +170,7 @@ const About = () => {
               <Button 
                 onClick={() => navigate('/subscribe')}
                 variant="outline"
-                className="border-bright-orange text-white hover:bg-bright-orange/10"
+                className="border-bright-orange text-bright-orange hover:bg-bright-orange/10"
               >
                 Subscribe Now
               </Button>
