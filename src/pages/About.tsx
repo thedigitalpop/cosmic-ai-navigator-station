@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -171,7 +170,7 @@ const About = () => {
               <Button 
                 onClick={() => navigate('/subscribe')}
                 variant="outline"
-                className="border-white/40 text-white hover:bg-white/10"
+                className="border-bright-orange text-white hover:bg-bright-orange/10"
               >
                 Subscribe Now
               </Button>
