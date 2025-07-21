@@ -57,6 +57,16 @@ export async function fetchEpisodes(): Promise<Episode[]> {
                   xml.querySelector('channel > itunes\\:image')?.getAttribute('href') || '';
       }
       
+      // Debug logging to see what's happening with images
+      console.log(`Episode ${episodeNumber}: "${title}" - Image URL: ${imageUrl || 'No image found'}`);
+      if (!imageUrl) {
+        console.log('Fallback sources checked:', {
+          episodeImage: item.querySelector('itunes\\:image')?.getAttribute('href'),
+          channelImageUrl: xml.querySelector('channel > image > url')?.textContent,
+          channelItunesImage: xml.querySelector('channel > itunes\\:image')?.getAttribute('href')
+        });
+      }
+      
       // Clean up description but preserve line breaks and list markers
       // This preserves <br> tags and whitespace before converting them to newlines
       let cleanDescription = description
