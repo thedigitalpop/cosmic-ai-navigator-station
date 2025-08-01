@@ -4,12 +4,20 @@ import Footer from '../components/Footer';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { Rocket, Star, Navigation, MessageSquare, Book, Users } from 'lucide-react';
+import SEOHead from '../components/SEO/SEOHead';
 
 const About = () => {
   const navigate = useNavigate();
   
   return (
     <div className="min-h-screen flex flex-col bg-space-gradient bg-fixed">
+      <SEOHead
+        title="About Ryan Poplin & Digital Pop - AI Navigator Station"
+        description="Learn about Ryan Poplin, CEO of Digital Pop, and the mission behind AI Navigator Station podcast. Discover how we're helping businesses navigate the AI revolution."
+        keywords="Ryan Poplin, Digital Pop CEO, AI consultant, AI business transformation, artificial intelligence expert, digital marketing expert"
+        type="website"
+      />
+      
       <Header />
       
       <main className="flex-grow py-16 px-6">

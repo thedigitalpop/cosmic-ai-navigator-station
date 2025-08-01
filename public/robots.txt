@@ -1,14 +1,19 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Podcast episodes are the priority content
+Allow: /podcasts/
+Allow: /episodes/
+
+# Main navigation pages
+Allow: /about
+Allow: /subscribe
+
+# Block admin/management pages from search engines
+Disallow: /episode-manager
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl delay (be nice to the server)
+Crawl-delay: 1

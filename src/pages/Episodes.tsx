@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { fetchEpisodes } from '../services/rssService';
 import { Episode } from '../components/EpisodeCard';
 import { Search } from 'lucide-react';
+import SEOHead from '../components/SEO/SEOHead';
 
 const Episodes = () => {
   const [episodes, setEpisodes] = useState<Episode[]>([]);
@@ -49,6 +50,13 @@ const Episodes = () => {
   
   return (
     <div className="min-h-screen flex flex-col bg-space-gradient bg-fixed">
+      <SEOHead
+        title="All Episodes - AI Navigator Station"
+        description="Browse all episodes of AI Navigator Station podcast by Ryan Poplin. Explore artificial intelligence, digital marketing, and business transformation insights."
+        keywords="AI podcast episodes, artificial intelligence episodes, digital marketing podcast, Ryan Poplin episodes, technology insights"
+        type="website"
+      />
+      
       <Header />
       
       <main className="flex-grow py-16 px-6">

@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../utils/formatters';
 import { createSlugFromTitle } from '../utils/urlUtils';
+import ImageWithSEO from './SEO/ImageWithSEO';
 
 export interface Episode {
   id: string;
@@ -33,20 +34,14 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
       <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-vivid-purple/30 h-full flex flex-col transition-all duration-300 hover:bg-white/10 hover:border-vivid-purple/60 hover:shadow-lg hover:shadow-vivid-purple/20">
         {/* Episode Image */}
         <div className="mb-4 aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-          {episode.imageUrl ? (
-            <img 
-              src={episode.imageUrl} 
-              alt={`${episode.title} thumbnail`} 
-              className="w-full h-full object-cover rounded-lg" 
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/placeholder.svg';
-              }}
-            />
-          ) : (
-            <div className="w-full h-full bg-vivid-purple/20 rounded-lg flex items-center justify-center">
-              <span className="text-white/60">No Image</span>
-            </div>
-          )}
+          <ImageWithSEO
+            src={episode.imageUrl || '/placeholder.svg'}
+            episodeTitle={episode.title}
+            episodeNumber={episode.episodeNumber}
+            className="w-full h-full object-cover rounded-lg"
+            width={400}
+            height={225}
+          />
         </div>
         
         {/* Episode Title */}

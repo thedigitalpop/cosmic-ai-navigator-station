@@ -8,6 +8,7 @@ import HeroSection from '../components/sections/HeroSection';
 import LatestEpisodesSection from '../components/sections/LatestEpisodesSection';
 import AboutSection from '../components/sections/AboutSection';
 import SubscribeSection from '../components/sections/SubscribeSection';
+import SEOHead from '../components/SEO/SEOHead';
 
 const Index = () => {
   const [latestEpisodes, setLatestEpisodes] = useState<Episode[]>([]);
@@ -34,6 +35,13 @@ const Index = () => {
   
   return (
     <div className="min-h-screen flex flex-col bg-space-gradient bg-fixed">
+      <SEOHead
+        title="AI Navigator Station - Digital Pop's Podcast"
+        description="Join Ryan Poplin on AI Navigator Station as we explore the cutting-edge world of artificial intelligence, digital marketing, and business transformation. Your guide to navigating the AI revolution."
+        keywords="AI Navigator Station, Digital Pop, Ryan Poplin, artificial intelligence podcast, AI business, digital marketing, technology podcast, AI transformation"
+        type="website"
+      />
+      
       <Header />
       
       <main className="flex-grow">

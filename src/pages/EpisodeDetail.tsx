@@ -15,6 +15,8 @@ import YouTubeEmbed from '../components/episode/YouTubeEmbed';
 import DigitalPopCallout from '../components/episode/DigitalPopCallout';
 import { formatDate, formatDescription } from '../utils/formatters';
 import { createSlugFromTitle, getEpisodeIdFromSlug } from '../utils/urlUtils';
+import SEOHead from '../components/SEO/SEOHead';
+import { generateEpisodeSEO } from '../utils/seoUtils';
 
 const EpisodeDetail = () => {
   // We now support both URL formats: /episodes/:id and /podcasts/:slug
@@ -78,9 +80,31 @@ const EpisodeDetail = () => {
   if (redirect) {
     return <Navigate to={redirect} replace />;
   }
+
+  // Generate SEO metadata for the episode
+  const seoData = episode ? generateEpisodeSEO(episode) : null;
   
   return (
     <div className="min-h-screen flex flex-col bg-space-gradient bg-fixed">
+      {/* SEO Head - Only render if we have episode data */}
+      {episode && seoData && (
+        <SEOHead
+          title={seoData.title}
+          description={seoData.description}
+          keywords={seoData.keywords}
+          image={seoData.image}
+          url={seoData.url}
+          type="episode"
+          publishedTime={episode.publishDate}
+          author="Ryan Poplin"
+          podcastData={{
+            episodeNumber: episode.episodeNumber,
+            duration: episode.duration,
+            audioUrl: episode.audioUrl
+          }}
+        />
+      )}
+      
       <Header />
       
       <main className="flex-grow py-16 px-6">

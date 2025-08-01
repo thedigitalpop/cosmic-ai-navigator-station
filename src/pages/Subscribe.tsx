@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SEOHead from '../components/SEO/SEOHead';
 import { 
   siSpotify, 
   siApplepodcasts, 
@@ -87,6 +88,13 @@ const Subscribe = () => {
   
   return (
     <div className="min-h-screen flex flex-col bg-space-gradient bg-fixed">
+      <SEOHead
+        title="Subscribe - AI Navigator Station Podcast"
+        description="Subscribe to AI Navigator Station on your favorite podcast platform. Get notified about new episodes exploring AI, digital marketing, and business transformation."
+        keywords="subscribe AI Navigator Station, podcast subscription, AI podcast, digital marketing podcast, Ryan Poplin podcast"
+        type="website"
+      />
+      
       <Header />
       
       <main className="flex-grow py-16 px-6">
