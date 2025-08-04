@@ -15,6 +15,7 @@ import YouTubeEmbed from '../components/episode/YouTubeEmbed';
 import DigitalPopCallout from '../components/episode/DigitalPopCallout';
 import { formatDate, formatDescription } from '../utils/formatters';
 import { createSlugFromTitle, getEpisodeIdFromSlug } from '../utils/urlUtils';
+import { shouldRedirectEpisodeUrl } from '../utils/redirectUtils';
 import SEOHead from '../components/SEO/SEOHead';
 import { generateEpisodeSEO } from '../utils/seoUtils';
 
@@ -26,6 +27,13 @@ const EpisodeDetail = () => {
   const [redirect, setRedirect] = useState<string | null>(null);
   
   useEffect(() => {
+    // Check for incorrect URL format and redirect if needed
+    const correctUrl = shouldRedirectEpisodeUrl(window.location.href);
+    if (correctUrl) {
+      setRedirect(correctUrl);
+      return;
+    }
+
     const loadEpisode = async () => {
       try {
         let fetchedEpisode: Episode | undefined;

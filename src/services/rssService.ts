@@ -35,11 +35,12 @@ export async function fetchEpisodes(): Promise<Episode[]> {
       // Generate a unique ID
       const id = item.querySelector('guid')?.textContent || index.toString();
       
-      // Calculate episode number
-      const episodeNumber = items.length - index; // Assuming newest episodes come first
+      // Extract episode number from title if available
+      const episodeMatch = title.match(/Episode\s+(\d+)/i);
+      const episodeNumber = episodeMatch ? parseInt(episodeMatch[1]) : items.length - index;
       
       // Generate slug
-      const slug = createSlugFromTitle(title, episodeNumber);
+      const slug = createSlugFromTitle(title);
       
       // Extract image URL if available
       // First try to get the episode-specific image from itunes:image

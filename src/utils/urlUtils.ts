@@ -1,10 +1,17 @@
 
 export function createSlugFromTitle(title: string, episodeNumber?: number): string {
-  // If episodeNumber is provided, ensure it's at the beginning of the slug
-  const prefix = episodeNumber ? `episode-${episodeNumber}-` : '';
+  // Extract episode number from title if it exists
+  const episodeMatch = title.match(/Episode\s+(\d+)/i);
+  const extractedEpisodeNumber = episodeMatch ? parseInt(episodeMatch[1]) : episodeNumber;
+  
+  // Remove "Episode X:" from the beginning of the title to avoid duplication
+  const cleanTitle = title.replace(/^Episode\s+\d+:\s*/i, '').trim();
+  
+  // If we have an episode number (extracted or provided), add it as prefix
+  const prefix = extractedEpisodeNumber ? `episode-${extractedEpisodeNumber}-` : '';
   
   // Convert title to lowercase, replace spaces with hyphens, and remove special characters
-  const titleSlug = title
+  const titleSlug = cleanTitle
     .toLowerCase()
     .replace(/[^\w\s-]/g, '') // Remove special characters
     .replace(/\s+/g, '-')     // Replace spaces with hyphens
